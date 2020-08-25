@@ -14,10 +14,6 @@ PKG_NAME:=sac
 PKG_VERSION:=2020082501
 PKG_RELEASE:=2020082501
 
-PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL=https://github.com/zokl/openwrt-homebridge-sac.git
-PKG_SOURCE_VERSION:=7f748ae62cff4bf5d31ced1df09b254d96806c74
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 PKG_MAINTAINER:=Zbynek Kocur <zokl@atlas.cz>
 
 include $(INCLUDE_DIR)/package.mk
