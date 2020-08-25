@@ -23,7 +23,7 @@ define Package/$(PKG_NAME)
   CATEGORY:=Homebridge
   TITLE:=Somfy Awning Controller
   URL:=https://github.com/zokl/openwrt-homebridge-sac
-  DEPENDS:=+lua +libubus +libubus-lua +libubox +libubox-lua +libuci-lua +node-homebridge-cmd4
+  DEPENDS:=+lua +libubus +libubus-lua +libubox +libubox-lua +libuci-lua ++node-homebridge +node-homebridge-cmd4
 endef
 
 define Package/$(PKG_NAME)/description

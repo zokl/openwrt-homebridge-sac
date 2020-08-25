@@ -325,7 +325,7 @@ local function somfy_init ()
     -- Somfy device 0th possition initialization
     logger("info", "Reseting Somfy device possition")
     somfy_device_rolling_up ()
-    -- sleep(CONF.time_to_open)
+    sleep(CONF.time_to_open)
 
     -- Create global table
     global_status_table = { 
@@ -336,7 +336,7 @@ local function somfy_init ()
         CurrentVerticalTiltAngle = 0,
         CurrentHorizontalTiltAngle = 0,
         ObstructionDetected = false, 
-        timestamp = gmtime() 
+        timestamp = gmtime()
     }
 
 end
