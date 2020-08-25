@@ -256,8 +256,6 @@ local function gpio_init (pin)
         write_to_sysfs (sysfs_gpio_path .. "gpio" .. pin .. "/direction", "out")
         -- Set GPIO to 0 - LOW
         set_gpio (pin, 0)
-        -- Change permissions to homebridge user
-        os.execute("chown homebridge ".. sysfs_gpio_path .. "gpio" .. pin .. "/value")
     end
 end
 
