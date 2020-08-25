@@ -269,7 +269,7 @@ local function clear_gpio_signal ()
 end
 
 local function somfy_device_rolling_up ()
-    logger("info", "*** Markyza se zatahuje ***")
+    logger("debug", "*** Somfy Device rolling UP ***")
     set_gpio (CONF.sysfs_gpio_up, '1')
     sleep(0.5)
     clear_gpio_signal ()
@@ -277,17 +277,13 @@ local function somfy_device_rolling_up ()
 end
 
 local function somfy_device_rolling_down ()
-    logger("info", "*** Markyza se vytahuje ***")
+    logger("debug", "*** Somfy Device rolling DOWN ***")
     set_gpio (CONF.sysfs_gpio_down, '1')
     sleep(0.5)
     clear_gpio_signal ()
 end
 
 local function somfy_device_rolling_stop ()
-
-    set_gpio (CONF.sysfs_gpio_stop, '1')
-    sleep(0.5)
-    clear_gpio_signal ()
 
     if global_status_table.TargetPosition == 0 then
 
@@ -298,6 +294,10 @@ local function somfy_device_rolling_stop ()
         logger("info", "Somfy device stopped at the END")
 
     else
+
+        set_gpio (CONF.sysfs_gpio_stop, '1')
+        sleep(0.5)
+        clear_gpio_signal ()
 
         logger("info", "Somfy device STOP rolling")
 
@@ -367,7 +367,6 @@ local function poller()
 
                 if motor_flag == true then
 
-                    -- markyza_down
                     somfy_device_rolling_down()
 
                     motor_flag = false
@@ -386,7 +385,6 @@ local function poller()
 
                 if motor_flag == true then
 
-                    -- markyza_up
                     somfy_device_rolling_up ()
 
                     motor_flag = false
