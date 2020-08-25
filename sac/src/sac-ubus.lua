@@ -227,24 +227,10 @@ local function write_to_sysfs (path, value)
 
     logger ("info", "Write '" .. value .. "' to '" .. path .."'")
 
-    -- local file = io.open(path, 'w')
-    -- file:write(value)
-    -- file:close()
+    local file = io.open(path, 'w')
+    file:write(value)
+    file:close()
 end
-
-local function gpio_init (pin)
-
-    logger("info", "Initialization of GPIO pin '" .. pin .."'")
-    if not exists (sysfs_gpio_path .. "gpio" .. pin) then
-        -- Enable GPIO PIN
-        write_to_sysfs (sysfs_gpio_path .. "export" , pin)
-        -- Set GPIO Out Direction
-        write_to_sysfs (sysfs_gpio_path .. "gpio" .. pin .. "/direction", "out")
-        -- Change permissions to homebridge user
-        os.execute("chown homebridge ".. sysfs_gpio_path .. "gpio" .. pin .. "/value")
-    end
-end
-
 
 local function set_gpio (pin, value)
 
@@ -259,6 +245,22 @@ local function set_gpio (pin, value)
 
     write_to_sysfs (sysfs_gpio_path .. "gpio" .. pin .. "/value", value)
 end
+
+local function gpio_init (pin)
+
+    logger("info", "Initialization of GPIO pin '" .. pin .."'")
+    if not exists (sysfs_gpio_path .. "gpio" .. pin) then
+        -- Enable GPIO PIN
+        write_to_sysfs (sysfs_gpio_path .. "export" , pin)
+        -- Set GPIO Out Direction
+        write_to_sysfs (sysfs_gpio_path .. "gpio" .. pin .. "/direction", "out")
+        -- Set GPIO to 0 - LOW
+        set_gpio (pin, 0)
+        -- Change permissions to homebridge user
+        os.execute("chown homebridge ".. sysfs_gpio_path .. "gpio" .. pin .. "/value")
+    end
+end
+
 
 local function clear_gpio_signal ()
     set_gpio (CONF.sysfs_gpio_down, '0')
