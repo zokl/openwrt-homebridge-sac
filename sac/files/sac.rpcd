@@ -1,0 +1,10 @@
+{
+        "unauthenticated": {
+                "description": "Access controls for sac requests",
+                "read": {
+                        "ubus": {
+                                "somfy": [ "get", "set", "status", "control" ]
+                        }
+                }
+        }
+}
