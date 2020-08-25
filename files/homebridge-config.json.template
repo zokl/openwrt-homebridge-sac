@@ -1,0 +1,43 @@
+{
+	"bridge": {
+		"name": "SomfyHomebridge",
+		"username": "CC:22:3D:E3:CE:88",
+		"manufacturer": "zokl@2020",
+		"model": "Olimex A20 MICRO",
+		"port": 518233,
+		"pin": "111-11-111"
+	},
+	"platforms": [
+	{
+		"platform": "Cmd4",
+		"name": "Cmd4",
+		"outputConstants":                  false,
+		"accessories" :
+		[
+			{
+				"type": "WindowCovering",
+				"displayName": "Somfy_Awning",
+				"currentPosition":           0,
+				"targetPosition":            0,
+				"positionState":            "STOPPED",
+				"holdPosition":             "FALSE",
+				"currentHorizontalTiltAngle":0,
+				"targetHorizontalTiltAngle": 0,
+				"currentVerticalTiltAngle":  0,
+				"targetVerticalTiltAngle":   0,
+				"obstructionDetected":      "FALSE",
+				"name":                     "Somfy_Awning",
+				"Manufacturer":             "Somfy",
+				"Model":                    "Erhardt",
+				"SerialNumber":             "12346",
+				"stateChangeResponseTime":   5,
+				"polling":                   true,
+				"interval":                  5,
+				"timeout":                   2000,
+				"state_cmd": "/bin/sh /usr/share/sac/sac-homebridge-wrapper.sh"
+			 }
+		]}
+
+]
+}
+

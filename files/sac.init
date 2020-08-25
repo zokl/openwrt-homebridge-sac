@@ -1,0 +1,30 @@
+#!/bin/sh /etc/rc.common
+#
+# FTWireless procd init script
+# 
+
+START=99
+STOP=40
+USE_PROCD=1
+NAME=sac
+PROG=/usr/sbin/${NAME}
+LUA=/usr/bin/lua
+
+
+start_service() {
+  procd_open_instance
+  procd_set_param env LUA_PATH="/usr/lib/lua/?.lua;/usr/lib/lua/$NAME/?.lua"
+  procd_set_param command ${LUA_ENV} ${LUA} ${PROG}
+  procd_set_param stdout 1
+  procd_set_param stderr 1
+  procd_set_param respawn
+  procd_close_instance
+}
+
+reload_service() {
+  restart
+}
+
+service_triggers() {
+	procd_add_reload_trigger ${NAME}
+}
