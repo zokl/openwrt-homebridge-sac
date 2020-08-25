@@ -49,7 +49,7 @@ define Package/$(PKG_NAME)/install
 	$(INSTALL_CONF) ./files/sac.conf $(1)/etc/config/sac
 
 	$(INSTALL_DIR) $(1)/usr/share/rpcd/acl.d/
-	$(INSTALL_CONF) ./files/sac.json $(1)/usr/share/rpcd/acl.d/sac.json
+	$(INSTALL_CONF) ./files/sac.rpcd $(1)/usr/share/rpcd/acl.d/sac.json
 
 	$(INSTALL_DIR) $(1)/usr/sbin
 	$(INSTALL_BIN) ./src/sac-ubus.lua $(1)/usr/sbin/sac
