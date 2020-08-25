@@ -235,7 +235,7 @@ end
 local function set_gpio (pin, value)
 
     if CONF.sysfs_active_low == true then
-        logger("info", "Swaping value bit on pin " .. pin)
+        logger("debug", "Swaping value bit on pin " .. pin)
         if value == '1' or value == 1 then
             value = '0'
         elseif value == '0' or value == 0 then
