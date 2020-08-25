@@ -225,7 +225,7 @@ end
 
 local function write_to_sysfs (path, value)
 
-    logger ("info", "Write '" .. value .. "' to '" .. path .."'")
+    logger ("debug", "Write '" .. value .. "' to '" .. path .."'")
 
     local file = io.open(path, 'w')
     file:write(value)
@@ -248,14 +248,25 @@ end
 
 local function gpio_init (pin)
 
-    logger("info", "Initialization of GPIO pin '" .. pin .."'")
-    if not exists (sysfs_gpio_path .. "gpio" .. pin) then
-        -- Enable GPIO PIN
-        write_to_sysfs (sysfs_gpio_path .. "export" , pin)
-        -- Set GPIO Out Direction
-        write_to_sysfs (sysfs_gpio_path .. "gpio" .. pin .. "/direction", "out")
-        -- Set GPIO to 0 - LOW
-        set_gpio (pin, 0)
+    if pin ~= nil then
+        logger("info", "Initialization of GPIO pin '" .. pin .."'")
+        if not exists (sysfs_gpio_path .. "gpio" .. pin) then
+            -- Enable GPIO PIN
+            write_to_sysfs (sysfs_gpio_path .. "export" , pin)
+
+            if not exists (sysfs_gpio_path .. "gpio" .. pin) then
+                logger("error", "Not able to initialize GPIO '" .. pin .. "'")
+                os.exit()
+            end
+          
+            -- Set GPIO Out Direction
+            write_to_sysfs (sysfs_gpio_path .. "gpio" .. pin .. "/direction", "out")
+            -- Set GPIO to 0 - LOW
+            set_gpio (pin, 0)
+        end
+    else
+        logger("error", "GPIO pins not defined correctly!!!")
+        os.exit(-1)
     end
 end
 
@@ -309,11 +320,11 @@ local function somfy_init ()
     logger ("info", sac_ubus._DESCRIPTION)
     logger("info", "------------------------------------")
     logger("info", "Loading configuration:")
-    logger("info", "   Loging level: " .. CONF.loglevel)
-    logger("info", "   Somfy device time to open: " .. CONF.time_to_open .. " s")
-    logger("info", "   Somfy device GPIO UP: " .. CONF.sysfs_gpio_up)
-    logger("info", "   Somfy device GPIO DOWN: " .. CONF.sysfs_gpio_down)
-    logger("info", "   Somfy device GPIO STOP: " .. CONF.sysfs_gpio_stop)
+    logger("info", "   Loging level: " .. tostring(CONF.loglevel))
+    logger("info", "   Somfy device time to open: " .. tostring(CONF.time_to_open .. " s"))
+    logger("info", "   Somfy device GPIO UP: " .. tostring(CONF.sysfs_gpio_up))
+    logger("info", "   Somfy device GPIO DOWN: " .. tostring(CONF.sysfs_gpio_down))
+    logger("info", "   Somfy device GPIO STOP: " .. tostring(CONF.sysfs_gpio_stop))
     logger("info", "   GPIO Hi/Lo swap: " .. tostring(CONF.sysfs_active_low))
     logger("info", "------------------------------------")
 
