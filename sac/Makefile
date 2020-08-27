@@ -12,7 +12,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=sac
 PKG_VERSION:=2020082501
-PKG_RELEASE:=2020082501
+PKG_RELEASE:=2020082601
 
 PKG_MAINTAINER:=Zbynek Kocur <zokl@atlas.cz>
 
@@ -23,7 +23,7 @@ define Package/$(PKG_NAME)
   CATEGORY:=Homebridge
   TITLE:=Somfy Awning Controller
   URL:=https://github.com/zokl/openwrt-homebridge-sac
-  DEPENDS:=+lua +libubus +libubus-lua +libubox +libubox-lua +libuci-lua +rpcd +node-homebridge +node-homebridge-cmd4
+  DEPENDS:=+lua +libubus +libubus-lua +libubox +libubox-lua +libuci-lua +sudo +node-homebridge +node-homebridge-cmd4
 endef
 
 define Package/$(PKG_NAME)/description
@@ -47,9 +47,6 @@ define Package/$(PKG_NAME)/install
 
 	$(INSTALL_DIR) $(1)/etc/config
 	$(INSTALL_CONF) ./files/sac.conf $(1)/etc/config/sac
-
-	$(INSTALL_DIR) $(1)/usr/share/rpcd/acl.d/
-	$(INSTALL_CONF) ./files/sac.rpcd $(1)/usr/share/rpcd/acl.d/sac.json
 
 	$(INSTALL_DIR) $(1)/usr/sbin
 	$(INSTALL_BIN) ./src/sac-ubus.lua $(1)/usr/sbin/sac
