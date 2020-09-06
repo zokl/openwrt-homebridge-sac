@@ -70,9 +70,11 @@ gpiochip1: GPIOs 413-415, parent: platform/axp20x-gpio, axp20x-gpio, can sleep:
 
 ## How it Works
 
-The program controls the GPIO outputs of the platform, which are connected to the RF controller Somfy Trelis RTS. Communication with the controller is only one-way. It is not possible to determine the current position of the device. The position between the closed and open states is determined from the set motor run time (time_to_open). Therefore, if the running time of the motor is 10 seconds, the engine is running for 5 seconds when the 50% opening setting is set.
+The program controls the GPIO outputs of the platform, which are connected to the RF controller Somfy Trelis RTS. Communication with the controller is only one-way. It is not possible to determine the current position of the device. The position between the closed and open states is determined from the set motor run time (*time_to_open*). Therefore, if the running time of the motor is 10 seconds, the engine is running for 5 seconds when the 50% opening setting is set.
 
 ### UBUS Integration
+
+UBUS parameters are compatible with Apple Homekit *Window Covering profile* served by homebridge-cmd4.
 
 **sac** can be control by UBUS commands:
 ```
@@ -85,22 +87,30 @@ root@HomeBridge:~# ubus -v list somfy
 	"get":{"action":"String"}
  ```
  
-**Awning UP**
+#### Awning UP
 Pulling out the awning.
 
 * `ubus call somfy control '{"rolling":"up"}'`
  
-**Awning DOWN**
+#### Awning DOWN
 Unfolding the awning.
 
 * `ubus call somfy control '{"rolling":"down"}'`
 
-**Awning STOP**
+#### Awning STOP
 Stop moving of awning device.
 
 * `ubus call somfy control '{"rolling":"down"}'`
 
-**Awning to 50%**
+#### Awning to 50%
 * `ubus call somfy set '{"TargetPosition":50}'`
 
+#### Read status of device
+* `ubus call somfy status`
+
+
 ### homebridge-cmd4 integration
+
+Apple's Homekit integration could be done by Homebridge plugin homebridge-cmd4 (https://www.npmjs.com/package/homebridge-cmd4). For that purpose, a special shell wrapper was made. The wrapper is stored in `/usr/share/sac/sac-homebridge-wrapper.sh`. UBUS works with root privileges. Homebridge shell wrapper must be run with sudo command. 
+
+Homebridge cmd4 config template is stored in the followed location: `/usr/share/sac/homebridge-config.json.template` or https://github.com/zokl/openwrt-homebridge-sac/blob/master/sac/files/homebridge-config.json.template
