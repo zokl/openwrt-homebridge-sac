@@ -132,7 +132,9 @@ Aliexppress - SOMFY Telis 4 RTS, Somfy Telis 4 Soliris RT garage door controller
 
 Please note: please don't use the original remote control before active the new remote.
 
-### Hot to connect to GPIO bracket
+### How to connect to GPIO bracket
+
+**The button is push by grounding it. To activate the opposite logic, it is necessary to set the `active_low` parameter to `1` in the configuration file.**
 
 List of GPIO pins:
 
@@ -143,4 +145,4 @@ List of GPIO pins:
 * Blue - FREE, unprogrammed, connected to maintain a fixed logic level
 * Green - STOP
 
-![Somfy Telis RTS4 interconnection](/Somfy_Telis_RTS4.jpeg)
+![Somfy Telis RTS4 interconnection](https://github.com/zokl/openwrt-homebridge-sac/blob/master/Somfy_Telis_RTS4.jpeg)
