@@ -13,6 +13,10 @@ The program is HW platform-independent. No RPI utils and programs need anymore :
 2. Choose **sac** in menuconfig *Extra package*
 3. Compile
 
+## Deployment
+
+OpenWRT deployment process. IMG or by opkg.
+
 ## Configuration
 
 Application **sac** has a configuration file in `/etc/config/sac`. In a configuration file could be specified several parameters. The restart of the **sac** process is necessary after editing the configuration file. 
@@ -109,8 +113,34 @@ Stop moving of awning device.
 * `ubus call somfy status`
 
 
-### homebridge-cmd4 integration
+## homebridge-cmd4 integration
 
 Apple's Homekit integration could be done by Homebridge plugin homebridge-cmd4 (https://www.npmjs.com/package/homebridge-cmd4). For that purpose, a special shell wrapper was made. The wrapper is stored in `/usr/share/sac/sac-homebridge-wrapper.sh`. UBUS works with root privileges. Homebridge shell wrapper must be run with sudo command. 
 
 Homebridge cmd4 config template is stored in the followed location: `/usr/share/sac/homebridge-config.json.template` or https://github.com/zokl/openwrt-homebridge-sac/blob/master/sac/files/homebridge-config.json.template
+
+## Somfy Telis RTL hack
+
+### Where to buy
+
+Aliexppress - SOMFY Telis 4 RTS, Somfy Telis 4 Soliris RT garage door controller compatible 433,42Mhz rolling code clone (https://www.aliexpress.com/item/33008184741.html?spm=a2g0s.9042311.0.0.27424c4doDbRrK)
+
+### How to clone original driver
+1. While pressing the button 1 of the remote, press 4 times of the button 2. Release both buttons. Now the led emits a quick flash every 2 sec.
+2. Press and hold the button 1 of the original remote control until our remote led will flashing every 1 second. Press the button 1 of our remote to save the code.
+3. The copy has been successful, after copy success, active the remote on the receiver, this action should be close to the gate opener. Press the button 1 of our remote until the led flash and go off. Then your new remote is ready to work.
+
+Please note: please don't use the original remote control before active the new remote.
+
+### Hot to connect to GPIO bracket
+
+List of GPIO pins:
+
+* Black - GND
+* White - Power source (3V3)
+* Gray - UP
+* Purple - DOWN
+* Blue - FREE, unprogrammed, connected to maintain a fixed logic level
+* Green - STOP
+
+![Somfy Telis RTS4 interconnection](/Somfy_Telis_RTS4.jpeg)
