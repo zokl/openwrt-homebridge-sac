@@ -117,13 +117,15 @@ Stop moving of awning device.
 
 Apple's Homekit integration could be done by Homebridge plugin homebridge-cmd4 (https://www.npmjs.com/package/homebridge-cmd4). For that purpose, a special shell wrapper was made. The wrapper is stored in `/usr/share/sac/sac-homebridge-wrapper.sh`. UBUS works with root privileges. Homebridge shell wrapper must be run with sudo command. 
 
-Homebridge cmd4 config template is stored in the followed location: `/usr/share/sac/homebridge-config.json.template` or https://github.com/zokl/openwrt-homebridge-sac/blob/master/sac/files/homebridge-config.json.template
+Homebridge cmd4 config template is stored in the followed location: `/usr/share/sac/homebridge-config.json.template` or https://github.com/zokl/openwrt-homebridge-sac/blob/master/sac/files/homebridge-config.json.template.
+
+Openwrt Makefile for homebridge-cmd4 and its dependencies could be found here: https://github.com/zokl/openwrt-node-packages.
 
 ## Somfy Telis RTL hack
 
 ### Where to buy
 
-Aliexppress - SOMFY Telis 4 RTS, Somfy Telis 4 Soliris RT garage door controller compatible 433,42Mhz rolling code clone (https://www.aliexpress.com/item/33008184741.html?spm=a2g0s.9042311.0.0.27424c4doDbRrK)
+Aliexppress - SOMFY Telis 4 RTS, Somfy Telis 4 Soliris RT garage door controller compatible 433,42Mhz rolling code clone (https://www.aliexpress.com/item/33008184741.html?spm=a2g0s.9042311.0.0.27424c4doDbRrK).
 
 ### How to clone original driver
 1. While pressing the button 1 of the remote, press 4 times of the button 2. Release both buttons. Now the led emits a quick flash every 2 sec.
