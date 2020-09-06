@@ -138,6 +138,8 @@ Please note: please don't use the original remote control before active the new 
 
 **The button is push by grounding it. To activate the opposite logic, it is necessary to set the `active_low` parameter to `1` in the configuration file.**
 
+**Do not put the battery inside the Somfy module if you use an external power source!!!**
+
 List of GPIO pins:
 
 * Black - GND
