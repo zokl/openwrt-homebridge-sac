@@ -19,8 +19,8 @@ PKG_MAINTAINER:=Zbynek Kocur <zokl@atlas.cz>
 include $(INCLUDE_DIR)/package.mk
 
 define Package/$(PKG_NAME)
-  SECTION:=Homebridge
-  CATEGORY:=Homebridge
+  SECTION:=Extra packages
+  CATEGORY:=Extra packages
   TITLE:=Somfy Awning Controller
   URL:=https://github.com/zokl/openwrt-homebridge-sac
   DEPENDS:=+lua +libubus +libubus-lua +libubox +libubox-lua +libuci-lua
